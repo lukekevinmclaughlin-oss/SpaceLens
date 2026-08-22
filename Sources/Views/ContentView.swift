@@ -1,5 +1,7 @@
 import SwiftUI
+#if !DIRECT_DISTRIBUTION
 import StoreKit
+#endif
 
 enum SidebarSection: String, CaseIterable, Identifiable {
     case explore = "Explore"
@@ -25,7 +27,9 @@ enum SidebarSection: String, CaseIterable, Identifiable {
 struct ContentView: View {
     @EnvironmentObject var model: ScanViewModel
     @EnvironmentObject var purchase: PurchaseManager
+    #if !DIRECT_DISTRIBUTION
     @Environment(\.requestReview) private var requestReview
+    #endif
     @AppStorage("storageAtlas.lastReviewRequest") private var lastReviewRequest = 0.0
 
     var body: some View {
@@ -39,6 +43,7 @@ struct ContentView: View {
                 LaunchView()
             }
         }
+        #if !DIRECT_DISTRIBUTION
         .onChange(of: model.root != nil) { _, hasRoot in
             if hasRoot { purchase.recordMeaningfulResult() }
         }
@@ -52,10 +57,13 @@ struct ContentView: View {
         .sheet(isPresented: $purchase.showPaywall) {
             PaywallView()
         }
+        #endif
         .onAppear {
+            #if !DIRECT_DISTRIBUTION
             if ProcessInfo.processInfo.environment["SPACELENS_SHOW_PAYWALL"] == "1" {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { purchase.showPaywall = true }
             }
+            #endif
             #if DEBUG
             if ProcessInfo.processInfo.environment["SPACELENS_SHOW_TIME_MACHINE"] == "1" {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { model.section = .timeMachine }

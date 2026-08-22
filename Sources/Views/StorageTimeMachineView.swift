@@ -33,6 +33,16 @@ struct StorageTimeMachineView: View {
                     .disabled(!purchase.hasAccess || snapshots.isEmpty)
                 }
 
+                #if DIRECT_DISTRIBUTION
+                if snapshots.isEmpty {
+                    ContentUnavailableView("No snapshots yet", systemImage: "clock.badge.questionmark",
+                                           description: Text("Complete a scan to create the first snapshot."))
+                        .frame(minHeight: 280)
+                } else {
+                    insightGrid
+                    historyCard
+                }
+                #else
                 if !purchase.hasAccess {
                     lockedCard
                 } else if snapshots.isEmpty {
@@ -43,12 +53,14 @@ struct StorageTimeMachineView: View {
                     insightGrid
                     historyCard
                 }
+                #endif
             }
             .padding(22)
         }
         .background(Theme.bgGradient)
     }
 
+    #if !DIRECT_DISTRIBUTION
     private var lockedCard: some View {
         VStack(spacing: 14) {
             Image(systemName: "lock.shield.fill").font(.system(size: 42)).foregroundStyle(Theme.holoCyan)
@@ -62,6 +74,7 @@ struct StorageTimeMachineView: View {
         }
         .padding(30).frame(maxWidth: .infinity, minHeight: 300).liquidGlass(cornerRadius: 22)
     }
+    #endif
 
     private var insightGrid: some View {
         let latest = snapshots.last!

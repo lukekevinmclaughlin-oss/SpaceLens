@@ -1,5 +1,25 @@
 import SwiftUI
 
+#if DIRECT_DISTRIBUTION
+struct PaywallView: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        ZStack {
+            HolographicBackground()
+            VStack(spacing: 20) {
+                HoloReticle(size: 86)
+                Text("SpaceLens Direct edition").font(.title2.bold()).foregroundStyle(Theme.holoIce)
+                Text("Storage Time Machine, forecasts, reports, cleanup tools, and the menu-bar watcher are all permanently unlocked.")
+                    .multilineTextAlignment(.center).foregroundStyle(Theme.holoCyan)
+                Button("Continue") { dismiss() }.buttonStyle(.borderedProminent)
+            }
+            .padding(30)
+        }
+        .preferredColorScheme(.dark)
+    }
+}
+#else
 struct PaywallView: View {
     @EnvironmentObject private var purchase: PurchaseManager
     @Environment(\.dismiss) private var dismiss
@@ -87,3 +107,4 @@ struct PaywallView: View {
         }
     }
 }
+#endif

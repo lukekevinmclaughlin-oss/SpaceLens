@@ -1,4 +1,20 @@
 import Foundation
+
+#if DIRECT_DISTRIBUTION
+@MainActor
+final class PurchaseManager: ObservableObject {
+    static let shared = PurchaseManager()
+    @Published private(set) var hasAccess = true
+    @Published var showPaywall = false
+    @Published private(set) var isLoading = false
+    @Published private(set) var isPurchasing = false
+    @Published var lastError: String?
+    private init() {}
+    func refresh() async {}
+    func restore() async {}
+    func recordMeaningfulResult() {}
+}
+#else
 import StoreKit
 
 @MainActor
@@ -140,3 +156,4 @@ final class PurchaseManager: ObservableObject {
         }
     }
 }
+#endif

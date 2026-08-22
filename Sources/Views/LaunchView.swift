@@ -90,6 +90,7 @@ struct LaunchView: View {
                 .opacity(appear ? 1 : 0)
             }
 
+            #if !DIRECT_DISTRIBUTION
             if !purchase.hasAccess && !didDismissProIntro {
                 VStack(spacing: 8) {
                     Label("Premium adds Storage Time Machine, growth forecasts, reports, and the Mac menu-bar watcher.",
@@ -107,6 +108,7 @@ struct LaunchView: View {
                 .frame(maxWidth: 430)
                 .liquidGlass(cornerRadius: 14, tint: Theme.holoCyan.opacity(0.25))
             }
+            #endif
 
             if !recents.recentLocations.isEmpty {
                 recentsSection.opacity(appear ? 1 : 0)

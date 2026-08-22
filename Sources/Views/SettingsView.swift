@@ -42,6 +42,14 @@ struct SettingsView: View {
                 Text("A menu-bar item watches every disk and nudges you when one runs low.")
                     .font(.caption).foregroundStyle(.secondary)
             }
+            #if DIRECT_DISTRIBUTION
+            Section("License") {
+                Label("Direct edition — fully unlocked", systemImage: "checkmark.seal.fill")
+                    .foregroundStyle(Theme.holoCyan)
+                Text("One-time website purchase. No subscription, in-app purchase, account, or restore step.")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+            #else
             Section("Subscription") {
                 if purchase.hasAccess {
                     Label("Storage Atlas Pro is active", systemImage: "checkmark.seal.fill")
@@ -52,6 +60,7 @@ struct SettingsView: View {
                 Link("Manage Subscription", destination: URL(string: "https://apps.apple.com/account/subscriptions")!)
                 Button("Restore Purchases") { Task { await purchase.restore() } }
             }
+            #endif
         }
         .formStyle(.grouped)
         .frame(width: 440, height: 560)
