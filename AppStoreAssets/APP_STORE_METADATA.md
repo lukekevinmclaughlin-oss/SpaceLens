@@ -47,7 +47,7 @@ Scanning and analysis happen locally. Storage Atlas reads only the folders you a
 
 PRO SUBSCRIPTION
 
-Storage Atlas is free to download and use. Scanning, visualization, cleanup, and export stay free forever, with no account and no sign-in. Storage Atlas Pro unlocks the advanced layer: the menu-bar space watcher and storage trends over time.
+Storage Atlas is free to download and use. Scanning, visualization, smart finders, and cleanup stay free forever, with no account and no sign-in. Storage Atlas Pro unlocks Storage Time Machine with historical scan comparisons, growth forecasts, exportable reports, and the menu-bar space watcher on Mac.
 
 - Storage Atlas Pro (Monthly)
 - Storage Atlas Pro (Annual)
@@ -60,7 +60,19 @@ Privacy Policy: https://www.lukekevinmclaughlin.com/privacy
 
 ## What's New
 
+Storage Time Machine adds private historical scan comparisons, storage growth forecasts, cleanup projections, and exportable reports. This release also fixes subscription entitlement refresh, expiration and cancellation handling, Restore Purchases, and the Mac launch issue reported by App Review.
 
+## App Review Notes
+
+No account or sign-in is required.
+
+1. Launch Storage Atlas and choose Downloads, Documents, or another folder.
+2. After the scan completes, the free analyzer appears and a dismissible Premium offer is shown. Choose “Continue Free” to keep testing the free features.
+3. To reach subscriptions again, open Settings and choose “Try Premium,” or select the locked “Time Machine” view in the sidebar.
+4. The paywall contains monthly and annual choices, Restore Purchases, Manage Subscription, Privacy Policy, Terms of Use, and Continue Free.
+5. Premium unlocks Storage Time Machine (historical comparisons, growth forecasts, cleanup projections, and report export) plus the menu-bar watcher on Mac.
+
+Build 7 is a materially expanded binary created specifically for Storage Atlas. It adds the unique Storage Time Machine workflow and contains no third-party app template. All file analysis remains on-device.
 
 ---
 
@@ -69,7 +81,7 @@ Privacy Policy: https://www.lukekevinmclaughlin.com/privacy
 - Apple ID: 6790095000
 - Bundle ID: com.lukemclaughlin.spacelens
 - Platform: IOS
-- Version: 1.0
+- Version: 1.1
 - State: READY_FOR_SALE
 - Locale: en-US
 - Promotional text: Understand storage at a glance with visual exploration, accurate size analysis, verified duplicate detection, and reversible cleanup in one private workspace.
@@ -113,7 +125,7 @@ Scanning and analysis happen locally. Storage Atlas reads only the folders you a
 
 PRO SUBSCRIPTION
 
-Storage Atlas is free to download and use. Scanning, visualization, cleanup, and export stay free forever, with no account and no sign-in. Storage Atlas Pro unlocks the advanced layer: the menu-bar space watcher and storage trends over time.
+Storage Atlas is free to download and use. Scanning, visualization, smart finders, and cleanup stay free forever, with no account and no sign-in. Storage Atlas Pro unlocks Storage Time Machine with historical scan comparisons, growth forecasts, exportable reports, and the menu-bar space watcher on Mac.
 
 - Storage Atlas Pro (Monthly)
 - Storage Atlas Pro (Annual)
@@ -126,4 +138,14 @@ Privacy Policy: https://www.lukekevinmclaughlin.com/privacy
 
 ## What's New
 
+Storage Time Machine adds private historical scan comparisons, storage growth forecasts, cleanup projections, and exportable reports. Subscription status now refreshes correctly after purchase, restore, expiration, cancellation, or revocation, and the app includes a clearer free path with non-obstructive Premium reminders.
 
+## App Review Notes
+
+No account or sign-in is required.
+
+1. Launch Storage Atlas and tap “Choose a folder or volume.” Select a folder from Files.
+2. After the scan completes, the free analyzer appears and a dismissible Premium offer is shown. Choose “Continue Free” to keep testing the free features.
+3. Select the locked “Time Machine” view in the sidebar to reopen the Premium offer.
+4. The paywall contains monthly and annual choices, Restore Purchases, Manage Subscription, Privacy Policy, Terms of Use, and Continue Free.
+5. Premium unlocks Storage Time Machine: historical comparisons, growth forecasts, cleanup projections, and report export.

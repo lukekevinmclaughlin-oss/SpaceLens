@@ -233,7 +233,7 @@ struct FinderListView: View {
                     Task { @MainActor in progressName = name }
                 }
             }.value)
-        case .explore:
+        case .explore, .timeMachine:
             break
         }
         if !cancel.isSet { model.finderCache[taskKey] = result }

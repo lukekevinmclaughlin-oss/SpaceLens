@@ -36,6 +36,7 @@ final class ScanViewModel: ObservableObject {
 
     // Undo of the most recent cleanup.
     @Published private(set) var lastTrash: [PlatformActions.TrashedItem] = []
+    @Published private(set) var successfulCleanupCount = 0
 
     // Finder result cache — keyed by section+epoch+settings so switching tabs
     // (especially back to Duplicates) doesn't re-hash. Invalidated on any change
@@ -105,7 +106,8 @@ final class ScanViewModel: ObservableObject {
                     self.volumeFree = Int64(vals?.volumeAvailableCapacityForImportantUsage ?? Int64(vals?.volumeAvailableCapacity ?? 0))
                     self.lastTrash = []
                     self.bumpFinders()
-                    RecentScans.shared.record(url: url, size: node.size, at: Date())
+                    RecentScans.shared.record(url: url, size: node.size,
+                                              volumeTotal: self.volumeTotal, volumeFree: self.volumeFree, at: Date())
                     self.state = .complete(duration: Date().timeIntervalSince(self.scanStart))
                 } else {
                     self.state = .failed("Scan was cancelled or the location could not be read.")
@@ -251,6 +253,7 @@ final class ScanViewModel: ObservableObject {
         if let s = selected, deletedIDs.contains(s.id) { selected = nil }
         if let h = hovered, deletedIDs.contains(h.id) { hovered = nil }
         lastTrash = result.items
+        if result.trashed > 0 { successfulCleanupCount += 1 }
         volumeFree += result.bytes              // reflect reclaimed space at once
         clearBasket()
         reaggregate(from: root)

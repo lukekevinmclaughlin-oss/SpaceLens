@@ -1,0 +1,74 @@
+{
+  "identifier" : "AE617F31-67A0-4E3A-9635-7D4F52270357",
+  "nonRenewingSubscriptions" : [],
+  "products" : [],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_renewalBillingIssuesEnabled" : false,
+    "_storefront" : "USA",
+    "_timeRate" : 0
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "22227275",
+      "localizations" : [
+        {
+          "description" : "Historical storage comparisons, growth forecasts, reports, and the Mac menu-bar watcher.",
+          "displayName" : "Storage Atlas Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "name" : "Storage Atlas Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "4.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "B17866CD-8C50-4D8C-A5C3-34040E2BE718",
+          "introductoryOffer" : {
+            "internalID" : "ED673F29-3AA4-4668-827D-F1FE85CD284A",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
+          "localizations" : [
+            {
+              "description" : "Storage Atlas Pro, billed monthly after a seven-day free trial.",
+              "displayName" : "Storage Atlas Pro Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.lukemclaughlin.spacelens.pro.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Storage Atlas Pro Monthly"
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "29.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "2B52A1A0-BB76-4731-8AA1-736AA2B20918",
+          "introductoryOffer" : {
+            "internalID" : "3641EE0B-5170-4113-A43C-6A6700393195",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
+          "localizations" : [
+            {
+              "description" : "Storage Atlas Pro, billed annually after a seven-day free trial.",
+              "displayName" : "Storage Atlas Pro Annual",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.lukemclaughlin.spacelens.pro.annual",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Storage Atlas Pro Annual"
+        }
+      ]
+    }
+  ],
+  "version" : { "major" : 4, "minor" : 0 }
+}

@@ -60,6 +60,18 @@ extension ScanViewModel {
         volumeTotal = 512 * gb
         volumeFree = 154 * gb
         state = .complete(duration: 1.84)
+
+        // Deterministic local history for Simulator/App Store screenshot QA.
+        if RecentScans.shared.entries.filter({ $0.path == rootNode.url.path }).count < 3 {
+            RecentScans.shared.record(url: rootNode.url, size: 310 * gb,
+                                      volumeTotal: volumeTotal, volumeFree: 176 * gb,
+                                      at: Calendar.current.date(byAdding: .day, value: -14, to: Date())!)
+            RecentScans.shared.record(url: rootNode.url, size: 335 * gb,
+                                      volumeTotal: volumeTotal, volumeFree: 165 * gb,
+                                      at: Calendar.current.date(byAdding: .day, value: -7, to: Date())!)
+            RecentScans.shared.record(url: rootNode.url, size: rootNode.size,
+                                      volumeTotal: volumeTotal, volumeFree: volumeFree, at: Date())
+        }
     }
 }
 #endif

@@ -15,6 +15,8 @@ final class PurchaseManager: ObservableObject {
     /// Contextual paywall trigger — set once after the first completed scan.
     @Published var showPaywall = false
     @Published private(set) var products: [Product] = []
+    @Published private(set) var isLoading = true
+    @Published private(set) var isPurchasing = false
     @Published var lastError: String?
     private var updatesTask: Task<Void, Never>?
 
@@ -32,12 +34,32 @@ final class PurchaseManager: ObservableObject {
 
     var monthlyProduct: Product? { products.first { $0.id == Self.monthlyID } }
     var yearlyProduct: Product? { products.first { $0.id == Self.yearlyID } }
-    var monthlyPrice: String { monthlyProduct?.displayPrice ?? "€2,99" }
-    var yearlyPrice: String { yearlyProduct?.displayPrice ?? "€14,99" }
+    var monthlyPrice: String { monthlyProduct?.displayPrice ?? "Monthly price unavailable" }
+    var yearlyPrice: String { yearlyProduct?.displayPrice ?? "Annual price unavailable" }
+
+    var yearlyCallToAction: String {
+        guard let product = yearlyProduct else { return "Try Premium" }
+        return product.subscription?.introductoryOffer == nil ? "Subscribe Annually" : "Start Free Trial"
+    }
+
+    var monthlyCallToAction: String {
+        guard let product = monthlyProduct else { return "Monthly plan" }
+        return product.subscription?.introductoryOffer == nil ? "Monthly — \(product.displayPrice)" : "Monthly free trial — then \(product.displayPrice)"
+    }
 
     func refresh() async {
-        do { products = try await Product.products(for: Self.productIDs) }
-        catch { products = [] }
+        isLoading = true
+        defer { isLoading = false }
+        do {
+            products = try await Product.products(for: Self.productIDs)
+                .sorted { $0.price < $1.price }
+            if products.count != Self.productIDs.count {
+                lastError = "One or more subscription options are temporarily unavailable."
+            }
+        } catch {
+            products = []
+            lastError = "Subscriptions couldn’t be loaded. Please check your connection and try again."
+        }
         await updateEntitlement()
     }
 
@@ -49,12 +71,23 @@ final class PurchaseManager: ObservableObject {
             lastError = "Subscriptions aren’t available right now. Please try again later."
             return
         }
+        isPurchasing = true
+        lastError = nil
+        defer { isPurchasing = false }
         do {
             let result = try await product.purchase()
-            if case .success(let verification) = result,
-               case .verified(let transaction) = verification {
+            switch result {
+            case .success(.verified(let transaction)):
                 await transaction.finish()
                 await updateEntitlement()
+            case .success(.unverified):
+                lastError = "The App Store could not verify this purchase. No Premium access was granted."
+            case .pending:
+                lastError = "This purchase is pending approval. Premium will unlock automatically when it completes."
+            case .userCancelled:
+                break
+            @unknown default:
+                lastError = "The purchase did not complete. Please try again."
             }
         } catch { lastError = error.localizedDescription }
     }
@@ -70,9 +103,13 @@ final class PurchaseManager: ObservableObject {
     }
 
     func restore() async {
+        lastError = nil
         do { try await AppStore.sync() }
         catch { lastError = error.localizedDescription }
         await updateEntitlement()
+        if !hasAccess && lastError == nil {
+            lastError = "No active Storage Atlas Pro subscription was found for this Apple Account."
+        }
     }
 
     private func updateEntitlement() async {
@@ -89,8 +126,7 @@ final class PurchaseManager: ObservableObject {
         #if DIRECT_DISTRIBUTION
         active = true
         #endif
-        hasAccess = true  // free: always unlocked
-        _ = active
+        hasAccess = active
     }
 
     private func listenForTransactions() -> Task<Void, Never> {

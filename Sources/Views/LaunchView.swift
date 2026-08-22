@@ -5,7 +5,9 @@ import AppKit
 
 struct LaunchView: View {
     @EnvironmentObject var model: ScanViewModel
+    @EnvironmentObject var purchase: PurchaseManager
     @ObservedObject private var recents = RecentScans.shared
+    @AppStorage("storageAtlas.didDismissProIntro") private var didDismissProIntro = false
     @State private var showImporter = false
     // Visible by default: the entrance is a bonus, never a gate. (A prior version
     // gated opacity on an onAppear-set flag, which the paywall's view-swap could
@@ -88,7 +90,25 @@ struct LaunchView: View {
                 .opacity(appear ? 1 : 0)
             }
 
-            if !recents.entries.isEmpty {
+            if !purchase.hasAccess && !didDismissProIntro {
+                VStack(spacing: 8) {
+                    Label("Premium adds Storage Time Machine, growth forecasts, reports, and the Mac menu-bar watcher.",
+                          systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90")
+                        .font(.callout).foregroundStyle(.white.opacity(0.8))
+                        .multilineTextAlignment(.center)
+                    HStack(spacing: 18) {
+                        Button("Try Premium") { purchase.showPaywall = true }
+                            .buttonStyle(.borderedProminent)
+                        Button("Continue Free") { didDismissProIntro = true }
+                            .buttonStyle(.plain)
+                    }
+                }
+                .padding(14)
+                .frame(maxWidth: 430)
+                .liquidGlass(cornerRadius: 14, tint: Theme.holoCyan.opacity(0.25))
+            }
+
+            if !recents.recentLocations.isEmpty {
                 recentsSection.opacity(appear ? 1 : 0)
             }
 
@@ -108,7 +128,7 @@ struct LaunchView: View {
                 Button("Clear") { recents.clear() }
                     .buttonStyle(.plain).font(.caption2).foregroundStyle(.white.opacity(0.4))
             }
-            ForEach(recents.entries) { entry in
+            ForEach(recents.recentLocations) { entry in
                 Button { openRecent(entry) } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "clock.arrow.circlepath").foregroundStyle(Theme.holoCyan.opacity(0.8))

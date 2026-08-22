@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SidebarView: View {
     @EnvironmentObject var model: ScanViewModel
+    @EnvironmentObject var purchase: PurchaseManager
 
     var body: some View {
         List {
@@ -36,10 +37,19 @@ struct SidebarView: View {
 
             Section("Views") {
                 ForEach(SidebarSection.allCases) { s in
-                    Button { model.section = s } label: {
+                    Button {
+                        if s == .timeMachine && !purchase.hasAccess {
+                            purchase.showPaywall = true
+                        } else {
+                            model.section = s
+                        }
+                    } label: {
                         HStack {
                             Label(s.rawValue, systemImage: s.symbol)
                             Spacer()
+                            if s == .timeMachine && !purchase.hasAccess {
+                                Image(systemName: "lock.fill").font(.caption2)
+                            }
                         }
                         .contentShape(Rectangle())
                     }

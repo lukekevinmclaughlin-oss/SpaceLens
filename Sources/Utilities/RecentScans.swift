@@ -8,21 +8,28 @@ final class RecentScans: ObservableObject {
     static let shared = RecentScans()
 
     struct Entry: Identifiable, Codable {
-        var id: String { path }
+        var id: String { "\(path)::\(lastScanned)" }
         let path: String
         let name: String
         var bookmark: Data?
         var lastScanned: Double     // referenceDate seconds
         var lastSize: Int64
+        var volumeTotal: Int64?
+        var volumeFree: Int64?
     }
 
     @Published private(set) var entries: [Entry] = []
     private let key = "recentScans.v1"
-    private let maxEntries = 6
+    private let maxEntries = 60
 
     private init() { load() }
 
-    func record(url: URL, size: Int64, at time: Date) {
+    var recentLocations: [Entry] {
+        var seen = Set<String>()
+        return entries.filter { seen.insert($0.path).inserted }.prefix(6).map { $0 }
+    }
+
+    func record(url: URL, size: Int64, volumeTotal: Int64, volumeFree: Int64, at time: Date) {
         var bookmark: Data?
         #if os(macOS)
         bookmark = try? url.bookmarkData(options: [.withSecurityScope],
@@ -31,8 +38,8 @@ final class RecentScans: ObservableObject {
         bookmark = try? url.bookmarkData()
         #endif
         let entry = Entry(path: url.path, name: url.lastPathComponent.isEmpty ? url.path : url.lastPathComponent,
-                          bookmark: bookmark, lastScanned: time.timeIntervalSinceReferenceDate, lastSize: size)
-        entries.removeAll { $0.path == entry.path }
+                          bookmark: bookmark, lastScanned: time.timeIntervalSinceReferenceDate, lastSize: size,
+                          volumeTotal: volumeTotal, volumeFree: volumeFree)
         entries.insert(entry, at: 0)
         if entries.count > maxEntries { entries = Array(entries.prefix(maxEntries)) }
         save()

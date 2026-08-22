@@ -1,4 +1,5 @@
 import SwiftUI
+import StoreKit
 
 enum SidebarSection: String, CaseIterable, Identifiable {
     case explore = "Explore"
@@ -6,6 +7,7 @@ enum SidebarSection: String, CaseIterable, Identifiable {
     case duplicates = "Duplicate Files"
     case old = "Old & Unopened"
     case devjunk = "Dev Junk"
+    case timeMachine = "Time Machine"
 
     var id: String { rawValue }
     var symbol: String {
@@ -15,6 +17,7 @@ enum SidebarSection: String, CaseIterable, Identifiable {
         case .duplicates: return "doc.on.doc.fill"
         case .old: return "clock.badge.exclamationmark.fill"
         case .devjunk: return "hammer.fill"
+        case .timeMachine: return "clock.arrow.trianglehead.counterclockwise.rotate.90"
         }
     }
 }
@@ -22,6 +25,8 @@ enum SidebarSection: String, CaseIterable, Identifiable {
 struct ContentView: View {
     @EnvironmentObject var model: ScanViewModel
     @EnvironmentObject var purchase: PurchaseManager
+    @Environment(\.requestReview) private var requestReview
+    @AppStorage("storageAtlas.lastReviewRequest") private var lastReviewRequest = 0.0
 
     var body: some View {
         Group {
@@ -37,6 +42,13 @@ struct ContentView: View {
         .onChange(of: model.root != nil) { _, hasRoot in
             if hasRoot { purchase.recordMeaningfulResult() }
         }
+        .onChange(of: model.successfulCleanupCount) { _, count in
+            let now = Date().timeIntervalSinceReferenceDate
+            let cooldown: TimeInterval = 120 * 24 * 60 * 60
+            guard count > 0, !purchase.showPaywall, now - lastReviewRequest > cooldown else { return }
+            lastReviewRequest = now
+            requestReview()
+        }
         .sheet(isPresented: $purchase.showPaywall) {
             PaywallView()
         }
@@ -44,6 +56,11 @@ struct ContentView: View {
             if ProcessInfo.processInfo.environment["SPACELENS_SHOW_PAYWALL"] == "1" {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { purchase.showPaywall = true }
             }
+            #if DEBUG
+            if ProcessInfo.processInfo.environment["SPACELENS_SHOW_TIME_MACHINE"] == "1" {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { model.section = .timeMachine }
+            }
+            #endif
         }
         .preferredColorScheme(.dark)
         .tint(Theme.holoCyan)
@@ -78,6 +95,8 @@ struct AnalysisView: View {
                                     .id(current.id)
                                     .transition(.opacity)
                             }
+                        case .timeMachine:
+                            StorageTimeMachineView()
                         default:
                             FinderListView(section: model.section)
                                 .transition(.opacity)

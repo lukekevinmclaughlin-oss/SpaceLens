@@ -31,6 +31,7 @@
 		88DB6B17751F38C20888873F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAF2C589D8C4E4D90EC1187 /* ContentView.swift */; };
 		8C1E08C96D956C0EC8CDC972 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35BD98FF011E2DB859014464 /* Assets.xcassets */; };
 		9334DBBA85779EE9D748D14C /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2DF231D3A1531A7613449F /* PurchaseManager.swift */; };
+		96ED9FC4C065FF7D967B8DC4 /* StorageTimeMachineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586524315E09F79541339E70 /* StorageTimeMachineView.swift */; };
 		993BF2D43B8BB5650627D5A3 /* SunburstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE2820BDB4BF961F7624B22 /* SunburstView.swift */; };
 		A8C481F178AF0E646FF89CA8 /* SmartFinders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D856714697F014FB3B08FFA /* SmartFinders.swift */; };
 		B20FF04085F4FB5D8995DF6E /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B75E27AC8EBEA2BB6A5AB /* LaunchView.swift */; };
@@ -55,6 +56,7 @@
 		418F002313B9F312F5608D7E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		47A56A3FABB9B1739C7C02B3 /* LiquidGlass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidGlass.swift; sourceTree = "<group>"; };
 		5025C6259459B33DE5E08448 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		586524315E09F79541339E70 /* StorageTimeMachineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTimeMachineView.swift; sourceTree = "<group>"; };
 		58D564D7B915EA2CC70BE467 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		5B2D4D44EF333DA8855B419D /* RecentScans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentScans.swift; sourceTree = "<group>"; };
 		67211662718ECD6699C7B030 /* SpaceLensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceLensApp.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				1AB1C33010BD9B08C144BE26 /* PaywallView.swift */,
 				D8FB0D5397824E95105A6E81 /* SettingsView.swift */,
 				D96A09866EB86A27AA6B7BB9 /* SidebarView.swift */,
+				586524315E09F79541339E70 /* StorageTimeMachineView.swift */,
 				8AE2820BDB4BF961F7624B22 /* SunburstView.swift */,
 				02C5259AC0A0BC4147FE135C /* TreemapView.swift */,
 			);
@@ -284,6 +287,7 @@
 				1C8B730E056CC467224E860C /* SidebarView.swift in Sources */,
 				A8C481F178AF0E646FF89CA8 /* SmartFinders.swift in Sources */,
 				BD10FBC7B00082294779B7C1 /* SpaceLensApp.swift in Sources */,
+				96ED9FC4C065FF7D967B8DC4 /* StorageTimeMachineView.swift in Sources */,
 				993BF2D43B8BB5650627D5A3 /* SunburstView.swift in Sources */,
 				114D65CE73CB14B1DA6CE4E4 /* Theme.swift in Sources */,
 				44AD1F54A0C8B5D955F34CBC /* TreemapView.swift in Sources */,
@@ -362,7 +366,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 24UCS53598;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -425,7 +429,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 24UCS53598;
 				ENABLE_HARDENED_RUNTIME = YES;

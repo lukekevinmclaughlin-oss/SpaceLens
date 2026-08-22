@@ -42,8 +42,18 @@ struct SettingsView: View {
                 Text("A menu-bar item watches every disk and nudges you when one runs low.")
                     .font(.caption).foregroundStyle(.secondary)
             }
+            Section("Subscription") {
+                if purchase.hasAccess {
+                    Label("Storage Atlas Pro is active", systemImage: "checkmark.seal.fill")
+                        .foregroundStyle(Theme.holoCyan)
+                } else {
+                    Button("Try Premium") { purchase.showPaywall = true }
+                }
+                Link("Manage Subscription", destination: URL(string: "https://apps.apple.com/account/subscriptions")!)
+                Button("Restore Purchases") { Task { await purchase.restore() } }
+            }
         }
         .formStyle(.grouped)
-        .frame(width: 440, height: 460)
+        .frame(width: 440, height: 560)
     }
 }
