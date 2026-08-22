@@ -72,7 +72,7 @@ No account or sign-in is required.
 4. The paywall contains monthly and annual choices, Restore Purchases, Manage Subscription, Privacy Policy, Terms of Use, and Continue Free.
 5. Premium unlocks Storage Time Machine (historical comparisons, growth forecasts, cleanup projections, and report export) plus the menu-bar watcher on Mac.
 
-Build 7 is a materially expanded binary created specifically for Storage Atlas. It adds the unique Storage Time Machine workflow and contains no third-party app template. All file analysis remains on-device.
+Build 8 is a materially expanded binary created specifically for Storage Atlas. It adds the unique Storage Time Machine workflow and contains no third-party app template. All file analysis remains on-device.
 
 ---
 

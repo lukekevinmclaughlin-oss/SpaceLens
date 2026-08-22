@@ -306,6 +306,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Storage Atlas";
 				INFOPLIST_KEY_CFBundleName = "Storage Atlas";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSDesktopFolderUsageDescription = "Storage Atlas needs access to scan your Desktop for large files.";
@@ -366,7 +367,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 24UCS53598;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -429,7 +430,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 24UCS53598;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -473,6 +474,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Storage Atlas";
 				INFOPLIST_KEY_CFBundleName = "Storage Atlas";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSDesktopFolderUsageDescription = "Storage Atlas needs access to scan your Desktop for large files.";
