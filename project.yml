@@ -1,0 +1,44 @@
+name: SpaceLens
+options:
+  bundleIdPrefix: com.lukemclaughlin
+  deploymentTarget:
+    macOS: "14.0"
+    iOS: "17.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "6"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: 24UCS53598
+    CODE_SIGN_STYLE: Automatic
+    GENERATE_INFOPLIST_FILE: YES
+    ENABLE_HARDENED_RUNTIME: YES
+
+targets:
+  SpaceLens:
+    type: application
+    supportedDestinations: [macOS, iOS]
+    sources:
+      - path: Sources
+      - path: Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lukemclaughlin.spacelens
+        PRODUCT_NAME: SpaceLens
+        CODE_SIGN_ENTITLEMENTS[sdk=macosx*]: SpaceLens.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_CFBundleDisplayName: Storage Atlas
+        INFOPLIST_KEY_CFBundleName: Storage Atlas
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.utilities
+        INFOPLIST_KEY_NSHumanReadableCopyright: "Copyright © 2026 Luke McLaughlin. All rights reserved."
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UIFileSharingEnabled: YES
+        INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace: YES
+        INFOPLIST_KEY_NSDesktopFolderUsageDescription: "Storage Atlas needs access to scan your Desktop for large files."
+        INFOPLIST_KEY_NSDocumentsFolderUsageDescription: "Storage Atlas needs access to scan your Documents for large files."
+        INFOPLIST_KEY_NSDownloadsFolderUsageDescription: "Storage Atlas needs access to scan your Downloads for large files."
+        COMBINE_HIDPI_IMAGES: YES
