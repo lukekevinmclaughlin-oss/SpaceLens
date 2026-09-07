@@ -6,6 +6,10 @@ A modern disk visualiser + cleaner for macOS, iPadOS and iOS. Native SwiftUI,
 built from scratch. The wedge against DaisyDisk / GrandPerspective is speed +
 a modern, animated UI + a cleanup-basket workflow.
 
+## Website
+
+See the [Mac product page](https://www.macossoftware.com/spacelens/) for screenshots, features, system requirements and the direct download edition. For help, visit [IndepApps support](https://www.macossoftware.com/support/).
+
 ## Build
 
 ```bash
